@@ -1,0 +1,62 @@
+/*  Realizar 3 juegos de luces con 14 leds
+ *  Juego 1: Los leds se encienden en secuencia de izquierda a derecha y se mantienen encendidos, 
+ *           luego de encenderse todos se comienzan a apagar en secuencia de derecha a izquierda
+ *  Juego 2: Los leds comienzan a encederse desde los extremos hacia el centro y luego nuevamente hacia los extremos
+ *  Juego 3: Se encienden un par de leds separados por un led de distancia de a izquierda a derecha en secuencia y se apagan en sentido contrario.
+ *  Kevin Flores
+ *  19-10-2016
+ */
+
+int i=0; //creamos e inicializamos el contador i
+int j=0; //creamos e inicializamos el contador j
+int leds[14]={0,1,2,3,4,5,6,7,8,9,10,11,12,13}; //creamos un vector de 14 posiciones que corresponden a los pines de salida del arduino
+void setup() {
+  pinMode (0, OUTPUT);//declaramos al pin como salida
+  pinMode (1, OUTPUT);//declaramos al pin como salida
+  pinMode (2, OUTPUT);//declaramos al pin como salida
+  pinMode (3, OUTPUT);//declaramos al pin como salida
+  pinMode (4, OUTPUT);//declaramos al pin como salida
+  pinMode (5, OUTPUT);//declaramos al pin como salida
+  pinMode (6, OUTPUT);//declaramos al pin como salida
+  pinMode (7, OUTPUT);//declaramos al pin como salida
+  pinMode (8, OUTPUT);//declaramos al pin como salida
+  pinMode (9, OUTPUT);//declaramos al pin como salida
+  pinMode (10, OUTPUT);//declaramos al pin como salida
+  pinMode (11, OUTPUT);//declaramos al pin como salida
+  pinMode (12, OUTPUT);//declaramos al pin como salida
+  pinMode (13, OUTPUT);//declaramos al pin como salida
+
+}
+void juego_1(){//creamos el metodo del juego 1
+  for(i=0;i<14;i++){//este ciclo permite determinar la secuencia en que los pines se pondran en alto
+  digitalWrite(leds[i],HIGH);
+  delay(200);  
+  }
+  for(i=14;i>=0;i--){//este ciclo hace que los leds se apaguen en secuencia contraria al encendido.
+  digitalWrite(leds[i],LOW); 
+  delay(200);  
+  }
+  }
+void juego_2(){//creamos el metodo del juego 2
+   for(i=0,j=13;i<7;i++,j--){//para este ciclo utilizamos dos contadores ya que los leds se encenderan al mismo tiempo, empezando desde los extremos
+  digitalWrite(leds[i],HIGH),digitalWrite(leds[j],HIGH);
+  delay(100);}
+  for(i=7,j=7;i>=0;i--,j++){//este ciclo cumple la funcion de apagar los leds en secuencia contraria al encendido, igualmente usamos dos contadores
+  digitalWrite(leds[i],LOW),digitalWrite(leds[j],LOW);
+  delay(100);}
+  }
+void juego_3(){//creamos el metodo del juego 3
+  for(i=0,j=2;i<12;i++,j++){este ciclo utiliza dos contadores y permite que los leds se enciendan y apaguen en pares con un led apagado en medio de ellos.
+  digitalWrite(leds[i],HIGH),digitalWrite(leds[j],HIGH);
+  delay(100);
+  digitalWrite(leds[i],LOW),digitalWrite(leds[j],LOW);
+  delay(100);}
+  }
+void loop() {
+  juego_1();// llamamos el metodo del juego 1
+  delay(500);// permite que exista una pausa en el cambio de juego a juego
+  juego_2();// llamamos el metodo del juego 2
+  delay(500);
+  juego_3();// llamamos el metodo del juego 3
+  delay(500);
+}
